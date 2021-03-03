@@ -15,4 +15,21 @@ manager.add_command("db", MigrateCommand)
 
 
 # Resources
+api.add_resource(OutfitResourceCreate, "/outfit/create")
 api.add_resource(OutfitResourceGenerate, "/outfit/generate")
+api.add_resource(OutfitResourceList, "/outfit/list")
+api.add_resource(OutfitResourceGetOne, "/outfit/get_one")
+api.add_resource(OutfitResourceEdit, "/outfit/edit")
+api.add_resource(OutfitResourceDelete, "/outfit/delete")
+
+api.add_resource(MoodsResourceCreate, "/mood/create")
+api.add_resource(MoodsResourceList, "/mood/list")
+api.add_resource(MoodsResourceGetOne, "/mood/get_one")
+api.add_resource(MoodsResourceEdit, "/mood/edit")
+api.add_resource(MoodsResourceDelete, "/mood/delete")
+
+api.add_resource(GarmentsResourceCreate, "/garment/create")
+api.add_resource(GarmentsResourceList, "/garment/list")
+api.add_resource(GarmentsResourceGetOne, "/garment/get_one")
+api.add_resource(GarmentsResourceEdit, "/garment/edit")
+api.add_resource(GarmentsResourceDelete, "/garment/delete")
