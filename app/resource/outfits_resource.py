@@ -1,10 +1,10 @@
 from . import Rpta
 from flask_restful import Resource
 from flask import Flask, request
-from app.controller.outfits_controller import OutfitController
+from app.controller.outfits_controller import OutfitsController
 
 
-class OutfitResourceCreate(Resource):
+class OutfitsResourceCreate(Resource):
     def post(self):
         try:
             data = request.get_json()
@@ -12,7 +12,7 @@ class OutfitResourceCreate(Resource):
             top = data["top"]
             bottom = data["bottom"]
             shoe = data["shoe"]
-            rpta = OutfitController.create(hat, top, bottom, shoe)
+            rpta = OutfitsController.create(hat, top, bottom, shoe)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()
@@ -20,7 +20,7 @@ class OutfitResourceCreate(Resource):
                             "Error : {}".format(str(e)))
 
 
-class OutfitResourceGenerate(Resource):
+class OutfitsResourceGenerate(Resource):
     def get(self):
         data = request.get_json()
         mood = data["mood"]
@@ -28,29 +28,29 @@ class OutfitResourceGenerate(Resource):
         tops = data["tops"]
         bottoms = data["bottoms"]
         shoes = data["shoes"]
-        rpta = OutfitController.generate(mood, hats, tops, bottoms, shoes)
+        rpta = OutfitsController.generate(mood, hats, tops, bottoms, shoes)
         return rpta
 
 
-class OutfitResourceList(Resource):
+class OutfitsResourceList(Resource):
     def get(self):
         try:
             data = request.get_json()
             id_user = data["id"]
-            rpta = OutfitController.list(id_user)
+            rpta = OutfitsController.list(id_user)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()
-            answer.setError("Couldn't get outfits list",
+            answer.setError("Couldn't get the outfits list",
                             "Error : {}".format(str(e)))
 
 
-class OutfitResourceGetOne(Resource):
+class OutfitsResourceGetOne(Resource):
     def get(self):
         try:
             data = request.get_json()
             id_outfit = data["id"]
-            rpta = OutfitController.get_one(id_outfit)
+            rpta = OutfitsController.get_one(id_outfit)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()
@@ -58,7 +58,7 @@ class OutfitResourceGetOne(Resource):
                             "Error : {}".format(str(e)))
 
 
-class OutfitResourceEdit(Resource):
+class OutfitsResourceEdit(Resource):
     def put(self):
         try:
             data = request.get_json()
@@ -67,7 +67,7 @@ class OutfitResourceEdit(Resource):
             top = data["top"]
             bottom = data["bottom"]
             shoe = data["shoe"]
-            rpta = OutfitController.get_one(id, hat, top, bottom, shoe)
+            rpta = OutfitsController.edit(id, hat, top, bottom, shoe)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()
@@ -75,12 +75,12 @@ class OutfitResourceEdit(Resource):
                             "Error : {}".format(str(e)))
 
 
-class OutfitResourceDelete(Resource):
+class OutfitsResourceDelete(Resource):
     def delete(self):
         try:
             data = request.get_json()
             id = data["id"]
-            rpta = OutfitController.delete(id)
+            rpta = OutfitsController.delete(id)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()
