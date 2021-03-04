@@ -16,6 +16,7 @@ class GarmentsDataAccess:
             )
             db.session.add(garment)
             db.session.flush()
+            return garment.id_garment
         except Exception as e:
             raise e
 

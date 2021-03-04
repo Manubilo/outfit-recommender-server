@@ -5,6 +5,7 @@ from typing import List, Dict
 from app.models.garment import Garment
 from app.models.mood import Mood
 from app.data_access.garments_data_access import GarmentsDataAccess
+from app.data_access.moods_data_access import MoodsDataAccess
 
 
 class GarmentsController:
@@ -12,8 +13,12 @@ class GarmentsController:
     @transactional
     def create(id_user: int, garment_name: str, garment_type: str, moods: List[Mood]):
         answer = Rpta()
-        GarmentsDataAccess.create(id_user, garment_name, garment_type)
+        id_garment = GarmentsDataAccess.create(
+            id_user, garment_name, garment_type)
         # Create in garment_x_mood all the moods of this garment
+        for mood in moods:
+            id_mood = MoodsDataAcess.get_one(mood).id_mood
+            Garment_x_MoodDataAccess.create(id_garment, id_mood)
         answer.setOk("Garment was created")
         return answer
 
