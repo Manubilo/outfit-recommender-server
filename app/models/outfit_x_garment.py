@@ -9,6 +9,6 @@ class Outfit_x_Garment(db.Model):
     id_outfit_x_garment = db.Column(
         'id_outfit_x_garment', db.Integer, primary_key=True)
     id_outfit = db.Column(
-        'id_outfit', db.ForeignKey(Garment.id_garment))  # FK
-    id_mood = db.Column(
-        'id_mood', db.ForeignKey(Mood.id_mood))  # FK
+        'id_outfit', db.ForeignKey(Outfit.id_outfit))  # FK
+    id_garment = db.Column(
+        'id_garment', db.ForeignKey(Garment.id_garment))  # FK

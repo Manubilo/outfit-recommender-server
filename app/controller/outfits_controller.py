@@ -5,19 +5,13 @@ from typing import List, Dict
 import random
 
 
-class OutfitController:
+class OutfitsController:
 
-    # Saves a new outfit
-
-    # Edits a new outfit
-
-    # Deletes a new outfit
-
-    # List all outfits
-
-    # Get one outfit
+    def create():
+        print("create")
 
     # Generates a new outfit
+
     @transactional
     def generate(mood: str, hats: list, tops: list, bottoms: list, shoes: list):
         # here i have to generate an outfit based on the garments in each of the categories
@@ -57,3 +51,15 @@ class OutfitController:
             "shoe": shoe.get("name")
         }
         return rpta
+
+    def list():
+        print("list")
+
+    def get_one():
+        print("get one")
+
+    def edit():
+        print("edit")
+
+    def delete():
+        print("delete")

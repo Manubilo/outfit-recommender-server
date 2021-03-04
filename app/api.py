@@ -12,6 +12,15 @@ api = Api(app)
 cors = CORS(app, resources={r"/api/*": {"origins": " *"}})
 
 from app.models import db
+from app.resource.outfits_resource import *
+from app.resource.moods_resource import *
+from app.resource.garments_resource import *
+from app.models.garment_x_mood import Garment_x_Mood
+from app.models.garment import Garment
+from app.models.mood import Mood
+from app.models.outfit_x_garment import Outfit_x_Garment
+from app.models.outfit import Outfit
+from app.models.user import User
 
 migrate = Migrate(app, db)
 manager = Manager(app)
