@@ -8,9 +8,12 @@ class GarmentsResourceCreate(Resource):
     def post(self):
         try:
             data = request.get_json()
-            garment = data["garment"]
+            id_user = data["id"]
+            garment_name = data["name"]
+            garment_type = data["type"]
             moods = data["moods"]
-            rpta = GarmentsController.create(garment, moods)
+            rpta = GarmentsController.create(
+                id_user, garment_name, garment_type, moods)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()

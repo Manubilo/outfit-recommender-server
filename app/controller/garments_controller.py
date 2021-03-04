@@ -2,14 +2,20 @@ from app.resource import Rpta
 from app.data_access import CommandDB, transactional
 from typing import List, Dict
 
+from app.models.garment import Garment
+from app.models.mood import Mood
 from app.data_access.garments_data_access import GarmentsDataAccess
 
 
 class GarmentsController:
 
     @transactional
-    def create():
-        print("create")
+    def create(id_user: int, garment_name: str, garment_type: str, moods: List[Mood]):
+        answer = Rpta()
+        GarmentsDataAccess.create(id_user, garment_name, garment_type)
+        # Create in garment_x_mood all the moods of this garment
+        answer.setOk("Garment was created")
+        return answer
 
     @transactional
     def list(id_user: int) -> Rpta:
