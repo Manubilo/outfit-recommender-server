@@ -15,6 +15,7 @@ from app.models import db
 from app.resource.outfits_resource import *
 from app.resource.moods_resource import *
 from app.resource.garments_resource import *
+from app.resource.users_resource import *
 from app.models.garment_x_mood import Garment_x_Mood
 from app.models.garment import Garment
 from app.models.mood import Mood
@@ -46,3 +47,7 @@ api.add_resource(GarmentsResourceList, "/garment/list")
 api.add_resource(GarmentsResourceGetOne, "/garment/get_one")
 api.add_resource(GarmentsResourceEdit, "/garment/edit")
 api.add_resource(GarmentsResourceDelete, "/garment/delete")
+
+api.add_resource(UsersResourceCreate, "/user/create")
+api.add_resource(UsersResourceList, "/user/list")
+api.add_resource(UsersResourceLogin, "/user/login")
