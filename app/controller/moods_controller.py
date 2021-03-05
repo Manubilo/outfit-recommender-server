@@ -35,8 +35,18 @@ class MoodsController:
         return answer
 
     @transactional
-    def get_one():
-        print("list")
+    def get_one(id_mood: int):
+        answer = Rpta()
+        mood = MoodsDataAccess.get_one(id_mood)
+        mood_dto: MoodDTO
+        mood_dto = MoodDTO.from_model(mood)
+        m = mood_dto.to_json()
+        res = {
+            "mood": m
+        }
+        answer.setBody(res)
+        answer.setOk("Got a mood")
+        return answer
 
     @transactional
     def edit():

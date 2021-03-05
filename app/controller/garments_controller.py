@@ -23,7 +23,7 @@ class GarmentsController:
         # Create in garment_x_mood all th   e moods of this garment
         for mood in moods:
             print("mood", mood)
-            id_mood = MoodsDataAccess.get_one(id_user, mood).id_mood
+            id_mood = MoodsDataAccess.get_by_name(id_user, mood).id_mood
             Garment_x_MoodDataAccess.create(id_garment, id_mood)
         answer.setOk("Garment was created")
         return answer
@@ -40,20 +40,17 @@ class GarmentsController:
             g = garment_dto.to_json()
 
             # Get garment's moods
-            print("g", g)
             id_garment = g["id_garment"]
-            print("id_garment", id_garment)
             l_g_x_m = Garment_x_MoodDataAccess.list(id_garment)
-            print("l_g_x_m", l_g_x_m)
             l_moods = []
             for g_x_m in l_g_x_m:
                 id_mood = g_x_m.id_mood
                 mood = MoodsDataAccess.get_by_id(id_mood)
-                l_moods.append(mood)
+                l_moods.append(mood.mood_name)
 
-            print("l_moods", l_moods)
-
+            g["moods"] = l_moods
             l_garments.append(g)
+
         res = {
             "garments": l_garments
         }

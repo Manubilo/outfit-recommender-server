@@ -23,14 +23,14 @@ class MoodsDataAccess:
         except Exception as e:
             raise e
 
-    def get_one(id_user: int, mood_name: str):
+    def get_one(id_mood: int):
         try:
-            return Mood.query.filter(Mood.id_user == id_user, Mood.mood_name == mood_name).first()
+            return Mood.query.filter(Mood.id_mood == id_mood).first()
         except Exception as e:
             raise e
 
-    def get_by_id(id_mood: int):
+    def get_by_name(id_user: int, mood_name: str):
         try:
-            return Mood.query.filter(Mood.id_mood == id_mood).first()
+            return Mood.query.filter(Mood.id_user == id_user, Mood.mood_name == mood_name).first()
         except Exception as e:
             raise e
