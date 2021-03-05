@@ -25,7 +25,7 @@ class MoodDTO():
     def from_model(cls, mood: Mood):
         d = cls(
             id_mood=mood.id_user,
-            mood_name=mood.garment_name,
+            mood_name=mood.mood_name,
             created_date=mood.created_date,
             modified_date=mood.modified_date,
             id_user=mood.id_user
