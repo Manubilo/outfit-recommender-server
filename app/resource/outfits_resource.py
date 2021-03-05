@@ -40,7 +40,6 @@ class OutfitsResourceList(Resource):
         try:
             data = request.get_json()
             id_user = data["id"]
-            print("id_user", id_user)
             rpta = OutfitsController.list(id_user)
             return rpta.toJson()
         except Exception as e:

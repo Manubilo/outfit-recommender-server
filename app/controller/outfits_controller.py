@@ -17,26 +17,21 @@ class OutfitsController:
     def create(id_user: int, outfit_name: str,  hat: str, top: str, bottom: str, shoe: str):
         answer = Rpta()
         id_outfit = OutfitsDataAccess.create(id_user, outfit_name)
-        print("id_outfit", id_outfit)
 
         id_garment = GarmentsDataAccess.get_one_by_name(
             id_user, hat).id_garment
-        print("id_garment", id_garment)
         Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
 
         id_garment = GarmentsDataAccess.get_one_by_name(
             id_user, top).id_garment
-        print("id_garment", id_garment)
         Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
 
         id_garment = GarmentsDataAccess.get_one_by_name(
             id_user, bottom).id_garment
-        print("id_garment", id_garment)
         Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
 
         id_garment = GarmentsDataAccess.get_one_by_name(
             id_user, shoe).id_garment
-        print("id_garment", id_garment)
         Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
 
         answer.setOk("Outfit was created")
@@ -88,7 +83,6 @@ class OutfitsController:
     def list(id_user: int):
         answer = Rpta()
         outfits = OutfitsDataAccess.list(id_user)
-        print("outfits", outfits)
         l_outfits = []
         for outfit in outfits:
             outfit_dto: OutfitDTO
@@ -98,18 +92,14 @@ class OutfitsController:
             # Search for the garments
             id_outfit = o["id_outfit"]
             l_o_x_g = Outfit_x_GarmentDataAccess.list(id_outfit)
-            print("l_o_x_g", l_o_x_g)
             l_garments = []
             for o_x_g in l_o_x_g:
                 id_garment = o_x_g.id_garment
-                print("id_garment", id_garment)
                 garment = GarmentsDataAccess.get_one(id_garment)
-                print("garment", garment)
                 garment_dto: GarmentDTO
                 garment_dto = GarmentDTO.from_model(garment)
                 g = garment_dto.to_json()
                 l_g_x_m = Garment_x_MoodDataAccess.list(id_garment)
-                print("l_g_x_m", l_g_x_m)
                 l_moods = []
                 for g_x_m in l_g_x_m:
                     id_mood = g_x_m.id_mood
@@ -117,7 +107,6 @@ class OutfitsController:
                     l_moods.append(mood.mood_name)
                 g["moods"] = l_moods
                 l_garments.append(g)
-            print("l_garments", l_garments)
             o["garments"] = l_garments
             l_outfits.append(o)
 
