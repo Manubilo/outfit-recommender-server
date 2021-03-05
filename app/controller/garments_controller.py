@@ -45,7 +45,7 @@ class GarmentsController:
             l_moods = []
             for g_x_m in l_g_x_m:
                 id_mood = g_x_m.id_mood
-                mood = MoodsDataAccess.get_by_id(id_mood)
+                mood = MoodsDataAccess.get_one(id_mood)
                 l_moods.append(mood.mood_name)
 
             g["moods"] = l_moods

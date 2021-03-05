@@ -17,9 +17,9 @@ class Outfit_x_GarmentDataAccess:
         except Exception as e:
             raise e
 
-    def list(id_garment: int):
+    def list(id_outfit: int):
         try:
             return Outfit_x_Garment.query.filter(
-                Outfit_x_Garment.id_garment == id_garment).all()
+                Outfit_x_Garment.id_outfit == id_outfit).all()
         except Exception as e:
             raise e

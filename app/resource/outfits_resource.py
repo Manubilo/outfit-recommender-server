@@ -38,10 +38,9 @@ class OutfitsResourceGenerate(Resource):
 class OutfitsResourceList(Resource):
     def get(self):
         try:
-            print("in list")
             data = request.get_json()
             id_user = data["id"]
-            print(id_user)
+            print("id_user", id_user)
             rpta = OutfitsController.list(id_user)
             return rpta.toJson()
         except Exception as e:
