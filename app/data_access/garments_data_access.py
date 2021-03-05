@@ -31,3 +31,9 @@ class GarmentsDataAccess:
             return Garment.query.filter(Garment.id_garment == id_garment).first()
         except Exception as e:
             raise e
+
+    def get_one_by_name(id_user: int, garment_name: str) -> Garment:
+        try:
+            return Garment.query.filter(Garment.id_user == id_user, Garment.garment_name == garment_name).first()
+        except Exception as e:
+            raise e

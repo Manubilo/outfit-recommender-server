@@ -2,13 +2,43 @@ from app.resource import Rpta
 from app.data_access import CommandDB, transactional
 from typing import List, Dict
 
-import random
+from app.data_access.outfits_data_access import OutfitsDataAccess
+from app.data_access.garments_data_access import GarmentsDataAccess
+from app.data_access.outfit_x_garment_data_access import Outfit_x_GarmentDataAccess
+
+from app.dto.outfits_dto import OutfitDTO
 
 
 class OutfitsController:
+    @transactional
+    def create(id_user: int, outfit_name: str,  hat: str, top: str, bottom: str, shoe: str):
+        answer = Rpta()
+        id_outfit = OutfitsDataAccess.create(id_user, outfit_name)
+        print("id_outfit", id_outfit)
 
-    def create():
-        print("create")
+        id_garment = GarmentsDataAccess.get_one_by_name(
+            id_user, hat).id_garment
+        print("id_garment", id_garment)
+        Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
+
+        id_garment = GarmentsDataAccess.get_one_by_name(
+            id_user, top).id_garment
+        print("id_garment", id_garment)
+        Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
+
+        id_garment = GarmentsDataAccess.get_one_by_name(
+            id_user, bottom).id_garment
+        print("id_garment", id_garment)
+        Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
+
+        id_garment = GarmentsDataAccess.get_one_by_name(
+            id_user, shoe).id_garment
+        print("id_garment", id_garment)
+        Outfit_x_GarmentDataAccess.create(id_outfit, id_garment)
+
+        answer.setOk("Outfit was created")
+
+        return answer
 
     # Generates a new outfit
 
@@ -55,8 +85,21 @@ class OutfitsController:
     def list():
         print("list")
 
-    def get_one():
-        print("get one")
+    def get_one(id_outfit: int):
+        answer = Rpta()
+        outfit = OutfitsDataAccess.get_one(id_outfit)
+        outfit_dto: OutfitDTO
+        outfit_dto = OutfitDTO.from_model(outfit)
+        print("outfit_dto", outfit_dto)
+        o = outfit_dto.to_json()
+
+        res = {
+            "outfit": o
+        }
+
+        answer.setBody(res)
+        answer.setOk("Got an outfit")
+        return answer
 
     def edit():
         print("edit")

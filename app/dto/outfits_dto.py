@@ -25,7 +25,7 @@ class OutfitDTO():
     def from_model(cls, outfit: Outfit):
         d = cls(
             id_outfit=outfit.id_outfit,
-            outfit_name=outfit.garment_name,
+            outfit_name=outfit.outfit_name,
             created_date=outfit.created_date,
             modified_date=outfit.modified_date,
             id_user=outfit.id_user

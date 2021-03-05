@@ -8,11 +8,14 @@ class OutfitsResourceCreate(Resource):
     def post(self):
         try:
             data = request.get_json()
+            id_user = data["id"]
+            outfit_name = data["name"]
             hat = data["hat"]
             top = data["top"]
             bottom = data["bottom"]
             shoe = data["shoe"]
-            rpta = OutfitsController.create(hat, top, bottom, shoe)
+            rpta = OutfitsController.create(
+                id_user, outfit_name, hat, top, bottom, shoe)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()
@@ -52,6 +55,7 @@ class OutfitsResourceGetOne(Resource):
         try:
             data = request.get_json()
             id_outfit = data["id"]
+            print("id_outfit", id_outfit)
             rpta = OutfitsController.get_one(id_outfit)
             return rpta.toJson()
         except Exception as e:
