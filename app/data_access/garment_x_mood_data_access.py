@@ -16,3 +16,10 @@ class Garment_x_MoodDataAccess:
             db.session.flush()
         except Exception as e:
             raise e
+
+    def list(id_garment: int):
+        try:
+            return Garment_x_Mood.query.filter(
+                Garment_x_Mood.id_garment == id_garment).all()
+        except Exception as e:
+            raise e

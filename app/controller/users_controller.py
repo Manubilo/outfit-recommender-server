@@ -6,6 +6,8 @@ from app.dto.users_dto import UserDTO
 
 from app.data_access.users_data_access import UsersDataAccess
 
+from argon2 import PasswordHasher
+
 
 class UsersController:
 

@@ -28,3 +28,9 @@ class MoodsDataAccess:
             return Mood.query.filter(Mood.id_user == id_user, Mood.mood_name == mood_name).first()
         except Exception as e:
             raise e
+
+    def get_by_id(id_mood: int):
+        try:
+            return Mood.query.filter(Mood.id_mood == id_mood).first()
+        except Exception as e:
+            raise e
