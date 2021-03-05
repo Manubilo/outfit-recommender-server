@@ -8,8 +8,9 @@ class MoodsResourceCreate(Resource):
     def post(self):
         try:
             data = request.get_json()
-            mood = data["mood"]
-            rpta = MoodsController.create(mood)
+            id_user = data["id"]
+            mood_name = data["moodName"]
+            rpta = MoodsController.create(id_user, mood_name)
             return rpta.toJson()
         except Exception as e:
             answer = Rpta()

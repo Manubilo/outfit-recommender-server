@@ -39,3 +39,9 @@ class UsersDataAccess:
 
         except Exception as e:
             raise e
+
+    def get_one(id_user: int) -> bool:
+        try:
+            return User.query.filter(User.id_user == id_user).first()
+        except Exception as e:
+            raise e

@@ -2,6 +2,7 @@ from app.resource import Rpta
 from app.data_access import CommandDB, transactional
 from typing import List, Dict
 
+from app.dto.users_dto import UserDTO
 
 from app.data_access.users_data_access import UsersDataAccess
 
@@ -21,8 +22,14 @@ class UsersController:
     def list() -> Rpta:
         answer = Rpta()
         users = UsersDataAccess.list()
+        l_users = []
+        for user in users:
+            user_dto: UserDTO
+            user_dto = UserDTO.from_model(user)
+            u = user_dto.to_json()
+            l_users.append(u)
         res = {
-            "users": users
+            "users": l_users
         }
         answer.setOk("Got list of users")
         answer.setBody(res)

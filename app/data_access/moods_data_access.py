@@ -5,23 +5,21 @@ from app.models.mood import Mood
 
 class MoodsDataAccess:
 
-    def create(id_user: int, garment_name: str, garment_type: str):
+    def create(id_user: int, mood_name: str):
         try:
-            garment: Garment
-            garment = Garment(
-                garment_name=garment_name,
-                garment_type=garment_type,
+            mood: Mood
+            mood = Mood(
+                mood_name=mood_name,
                 id_user=id_user
             )
-            db.session.add(garment)
+            db.session.add(mood)
             db.session.flush()
-            return garment.id_garment
         except Exception as e:
             raise e
 
-    def list(id_user: int) -> List[Garment]:
+    def list(id_user: int) -> List[Mood]:
         try:
-            return Garment.query.filter(Garment.id_user == id_user).all()
+            return Mood.query.filter(Mood.id_user == id_user).all()
         except Exception as e:
             raise e
 
