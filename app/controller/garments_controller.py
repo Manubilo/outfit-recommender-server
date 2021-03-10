@@ -8,6 +8,7 @@ from app.data_access.garments_data_access import GarmentsDataAccess
 from app.data_access.moods_data_access import MoodsDataAccess
 from app.data_access.garment_x_mood_data_access import Garment_x_MoodDataAccess
 from app.data_access.moods_data_access import MoodsDataAccess
+from app.data_access.outfit_x_garment_data_access import Outfit_x_GarmentDataAccess
 
 from app.dto.garments_dto import GarmentDTO
 from app.dto.moods_dto import MoodDTO
@@ -79,5 +80,12 @@ class GarmentsController:
         print("list")
 
     @transactional
-    def delete():
-        print("list")
+    def delete(id_garment: int):
+        print("estoy en delete garment")
+        answer = Rpta()
+        l_o_x_g = Outfit_x_GarmentDataAccess.list_by_id_garment(id_garment)
+        for o_x_g in l_o_x_g:
+            Outfit_x_GarmentDataAccess.delete(o_x_g.id_outfit_x_garment)
+        GarmentsDataAccess.delete(id_garment)
+        answer.setOk("Garment was deleted")
+        return answer

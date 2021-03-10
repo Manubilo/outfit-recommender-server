@@ -67,6 +67,7 @@ class GarmentsResourceDelete(Resource):
         try:
             data = request.get_json()
             id_garment = data["id"]
+            print("id_garment", id_garment)
             rpta = GarmentsController.delete(id_garment)
             return rpta.toJson()
         except Exception as e:

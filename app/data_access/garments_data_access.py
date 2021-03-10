@@ -37,3 +37,11 @@ class GarmentsDataAccess:
             return Garment.query.filter(Garment.id_user == id_user, Garment.garment_name == garment_name).first()
         except Exception as e:
             raise e
+
+    def delete(id_garment):
+        try:
+            garment = GarmentsDataAccess.get_one(id_garment)
+            db.session.delete(garment)
+            db.session.flush()
+        except Exception as e:
+            raise e

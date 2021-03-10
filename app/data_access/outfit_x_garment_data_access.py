@@ -17,9 +17,30 @@ class Outfit_x_GarmentDataAccess:
         except Exception as e:
             raise e
 
+    def get_one(id_outfit_x_garment: int):
+        try:
+            return Outfit_x_Garment.query.filter(Outfit_x_Garment.id_outfit_x_garment == id_outfit_x_garment).first()
+        except Exception as e:
+            raise e
+
     def list(id_outfit: int):
         try:
             return Outfit_x_Garment.query.filter(
                 Outfit_x_Garment.id_outfit == id_outfit).all()
+        except Exception as e:
+            raise e
+
+    def list_by_id_garment(id_garment: int):
+        try:
+            return Outfit_x_Garment.query.filter(
+                Outfit_x_Garment.id_garment == id_garment).all()
+        except Exception as e:
+            raise e
+
+    def delete(id_outfit_x_garment: int):
+        try:
+            o_x_g = Outfit_x_GarmentDataAccess.get_one(id_outfit_x_garment)
+            db.session.delete(o_x_g)
+            db.session.flush()
         except Exception as e:
             raise e
