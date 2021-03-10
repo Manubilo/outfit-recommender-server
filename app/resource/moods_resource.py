@@ -21,7 +21,7 @@ class MoodsResourceCreate(Resource):
 class MoodsResourceList(Resource):
     def get(self):
         try:
-            data = request.get_json()
+            data = request.args
             id_user = data["id"]
             rpta = MoodsController.list(id_user)
             return rpta.toJson()
@@ -63,6 +63,7 @@ class MoodsResourceDelete(Resource):
         try:
             data = request.get_json()
             id_mood = data["id"]
+            print("received id_mood = ", id_mood)
             rpta = MoodsController.delete(id_mood)
             return rpta.toJson()
         except Exception as e:

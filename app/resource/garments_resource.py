@@ -24,7 +24,7 @@ class GarmentsResourceCreate(Resource):
 class GarmentsResourceList(Resource):
     def get(self):
         try:
-            data = request.get_json()
+            data = request.args
             id_user = data["id"]
             rpta = GarmentsController.list(id_user)
             return rpta.toJson()

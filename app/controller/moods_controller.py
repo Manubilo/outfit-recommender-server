@@ -4,6 +4,7 @@ from typing import List, Dict
 
 from app.data_access.moods_data_access import MoodsDataAccess
 from app.data_access.users_data_access import UsersDataAccess
+from app.data_access.garment_x_mood_data_access import Garment_x_MoodDataAccess
 
 from app.dto.moods_dto import MoodDTO
 
@@ -53,5 +54,13 @@ class MoodsController:
         print("list")
 
     @transactional
-    def delete():
-        print("list")
+    def delete(id_mood: int):
+        answer = Rpta()
+        # Delete from garment_x_mood table first
+        l_g_x_m = Garment_x_MoodDataAccess.list_by_id_mood(id_mood)
+        for g_x_m in l_g_x_m:
+            Garment_x_MoodDataAccess.delete(g_x_m.id_garment_x_mood)
+        # Then delete from mood table
+        MoodsDataAccess.delete(id_mood)
+        answer.setOk("Mood deleted")
+        return answer

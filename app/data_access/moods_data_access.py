@@ -34,3 +34,11 @@ class MoodsDataAccess:
             return Mood.query.filter(Mood.id_user == id_user, Mood.mood_name == mood_name).first()
         except Exception as e:
             raise e
+
+    def delete(id_mood: int):
+        try:
+            mood = MoodsDataAccess.get_one(id_mood)
+            db.session.delete(mood)
+            db.session.commit()
+        except Exception as e:
+            raise e

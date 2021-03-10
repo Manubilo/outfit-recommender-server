@@ -17,9 +17,30 @@ class Garment_x_MoodDataAccess:
         except Exception as e:
             raise e
 
-    def list(id_garment: int):
+    def get_one(id_garment_x_mood: int):
+        try:
+            return Garment_x_Mood.query.filter(Garment_x_Mood.id_garment_x_mood == id_garment_x_mood).first()
+        except Exception as e:
+            raise e
+
+    def list_by_id_garment(id_garment: int):
         try:
             return Garment_x_Mood.query.filter(
                 Garment_x_Mood.id_garment == id_garment).all()
+        except Exception as e:
+            raise e
+
+    def list_by_id_mood(id_mood: int):
+        try:
+            return Garment_x_Mood.query.filter(
+                Garment_x_Mood.id_mood == id_mood).all()
+        except Exception as e:
+            raise e
+
+    def delete(id_garment_x_mood: int):
+        try:
+            g_x_m = Garment_x_MoodDataAccess.get_one(id_garment_x_mood)
+            db.session.delete(g_x_m)
+            db.session.flush()
         except Exception as e:
             raise e

@@ -99,7 +99,8 @@ class OutfitsController:
                 garment_dto: GarmentDTO
                 garment_dto = GarmentDTO.from_model(garment)
                 g = garment_dto.to_json()
-                l_g_x_m = Garment_x_MoodDataAccess.list(id_garment)
+                l_g_x_m = Garment_x_MoodDataAccess.list_by_id_garment(
+                    id_garment)
                 l_moods = []
                 for g_x_m in l_g_x_m:
                     id_mood = g_x_m.id_mood

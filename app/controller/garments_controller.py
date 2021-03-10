@@ -41,7 +41,7 @@ class GarmentsController:
 
             # Get garment's moods
             id_garment = g["id_garment"]
-            l_g_x_m = Garment_x_MoodDataAccess.list(id_garment)
+            l_g_x_m = Garment_x_MoodDataAccess.list_by_id_garment(id_garment)
             l_moods = []
             for g_x_m in l_g_x_m:
                 id_mood = g_x_m.id_mood
